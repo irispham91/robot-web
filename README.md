@@ -20,7 +20,7 @@ pre-commit install
 ```
 - Download the latest Chrome/Firefox driver and put it in the directory `PYTHON_HOME\Scripts`
 
-## Run tests and generate Allure reports
+## Run tests and generate reports
 
 - Sequential option
 ```commandline
