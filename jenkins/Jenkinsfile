@@ -1,0 +1,37 @@
+pipeline {
+    // https://www.jenkins.io/doc/book/pipeline/docker/
+    agent {
+        docker { image 'thuanphamdocker/robot-framework:6' }
+    }
+    // https://plugins.jenkins.io/file-parameters/
+    parameters {
+        stashedFile 'FILE'
+    }
+    stages {
+        stage('Update csv file') {
+            steps {
+                unstash 'FILE'
+                sh "mv FILE data_variables/luma/customer.csv"
+                archiveArtifacts artifacts: "data_variables/luma/customer.csv"
+            }
+        }
+        stage('Run test') {
+            steps {
+                // https://github.com/mkorpela/pabot
+                script{
+                    sh 'pabot --pythonpath . -d results -i order tests'
+                }
+            }
+        }
+    }
+    post { 
+        // https://www.jenkins.io/doc/book/pipeline/syntax/#post-conditions
+        always { 
+            script {
+                file = "JenkinsResult_e2e_luma_"+ BUILD_NUMBER +".zip"
+            }
+            sh "zip -r ${file} results/ "
+            archiveArtifacts artifacts: "results/log.html,results/report.html,${file}"
+        }
+    }
+}

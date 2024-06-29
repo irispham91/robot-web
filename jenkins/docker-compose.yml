@@ -1,0 +1,51 @@
+# version: "3"
+services:
+  jenkins-blueocean:
+    container_name: jenkins-blueocean
+    build: .
+    restart: always
+    networks:
+      - jenkins
+    ports:
+      - 7000:7000
+      - 50000:50000
+    tty: true
+    group_add:
+      - root
+    volumes:
+      - //var/run/docker.sock:/var/run/docker.sock
+      - ./jenkins-data:/var/jenkins_home
+      - ./jenkins-docker-certs:/certs/client:ro
+    environment:
+      DOCKER_HOST: "tcp://docker:2376"
+      DOCKER_CERT_PATH: "/certs/client"
+      DOCKER_TLS_VERIFY: "1"
+      JENKINS_OPTS: "--httpPort=7000"
+      JAVA_OPTS: |-
+        -Dhudson.model.DirectoryBrowserSupport.CSP="sandbox allow-scripts; default-src 'none'; img-src 'self' data: ; style-src 'self' 'unsafe-inline' data: ; script-src 'self' 'unsafe-inline' 'unsafe-eval' ;" -Djava.awt.headless=true -Dmail.smtp.starttls.enable=true
+  dind:
+    container_name: jenkins-docker
+    image: docker:dind
+    command: "--insecure-registry docker.hub.local"
+    privileged: true
+    restart: always
+    networks:
+      jenkins:
+        aliases:
+          - docker
+    ports:
+      - 2376:2376
+      - 3100:3100
+    tty: true
+    volumes:
+      - ./jenkins-data:/var/jenkins_home
+      - ./jenkins-docker-certs:/certs/client
+    environment:
+      DOCKER_TLS_CERTDIR: "/certs"
+
+networks:
+  jenkins:
+
+volumes:
+  jenkins-data:
+  jenkins-docker-certs:

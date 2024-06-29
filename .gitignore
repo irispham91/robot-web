@@ -1,0 +1,10 @@
+.idea/
+.git/
+venv/
+__pycache__
+.pytest_cache/
+*.log
+results/
+jenkins/jenkins-data/
+jenkins/jenkins-docker-certs/
+.pabotsuitenames
