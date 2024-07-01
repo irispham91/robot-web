@@ -73,33 +73,24 @@ Root Folder
 
 Test Suites
 - tests/ - Test Suites folder
-    + e2e/
-        ++ luma/ - Folder containing Test Suites for Luma system
-            +++ order_creation.robot - Test Suite for order creation
-    + funtional/
-        ++ checkout/ - Folder containing Test Suites for Checkout
-            +++ checkout_basic.robot - Test Suites for standard Checkout
-            +++ checkout_premium.robot - Test Suites for premium Checkout
-        ++ csm/ - Folder containing Test Suites for CSM system
-            +++ upload_file.robot - Test Suite for Upload functionality
-        ++ extension/ - Folder containing Test Suites for Chrome extension
-            +++ add_shortcut.robot - Test Suite for Add Shortcut functionality
+    + e2e/luma/order_creation.robot - End to End Test Suite for order creation on Luma site/system
+    + funtional/checkout/checkout_basic.robot - Functional Test Suites for standard Checkout
+    + funtional/checkout/checkout_premium.robot - Functional Test Suites for premium Checkout
+    + funtional/csm/upload_file.robot - Functional Test Suite for Upload functionality on CSM site/system
+    + funtional/extension/add_shortcut.robot - Functional Test Suite for Add Shortcut functionality on Chrome extension site
 
 Resources
 - resources/ - Reusable keywords
-    + keywords/
-        ++ common.robot - General Keywords (e.g. Login/Logout, Navigation, ...) are stored here
-        ++ csm.robot - Keywords for CSM system are stored here
-        ++ extension.robot - Keywords for Chrome extension are stored here
-        ++ luma.robot - Keywords for Luma system are stored here
-    + locators/
-        ++ csm.robot - Locators for CSM system are stored here
-        ++ extension.robot - Locators for Chrome extension are stored here
-        ++ luma.robot - Locators for Luma system are stored here
-    + settings/
-        ++ csm.robot - Settings for CSM system are stored here
-        ++ extension.robot - Settings for Chrome extension are stored here
-        ++ luma.robot - Settings for Luma system are stored here
+    + keywords/common.robot - General Keywords (e.g. Login/Logout, Navigation, ...) are stored here
+    + keywords/csm.robot - Keywords for CSM system are stored here
+    + keywords/extension.robot - Keywords for Chrome extension are stored here
+    + keywords/luma.robot - Keywords for Luma system are stored here
+    + locators/csm.robot - Locators for CSM system are stored here
+    + locators/extension.robot - Locators for Chrome extension are stored here
+    + locators/luma.robot - Locators for Luma system are stored here
+    + settings/csm.robot - Settings for CSM system are stored here
+    + settings/extension.robot - Settings for Chrome extension are stored here
+    + settings/luma.robot - Settings for Luma system are stored here
 
 Libraries
 - libraries/ - Custom Python Keyword libraries
@@ -108,22 +99,16 @@ Libraries
 
 Data
 - data_variables/ - https://docs.robotframework.org/docs/variables
-    + csm/
-        ++ config.py - CSM Config are stored here
-        ++ SampleJPGImage_2mbmb.jpg - Image is used for testing
-    + extension/
-        ++ config.py - Extension Config are stored here
-    + luma/
-        ++ config.py - Luma Config are stored here
-        ++ customer.csv - Data is used for testing
-    common_config.py - General Config are stored here
+    + csm/config.py - CSM Config are stored here
+    + csm/SampleJPGImage_2mbmb.jpg - Image is used for testing
+    + extension/config.py - Extension Config are stored here
+    + luma/config.py - Luma Config are stored here
+    + luma/customer.csv - Data is used for testing
+    + common_config.py - General Config are stored here
 
 Jenkins Server
 - jenkins/ - Folder containing docker file for building up Jenkins server
-    + images/ - Folder containing docker file for building up docker image which is used for running test
-        ++ chromedriver-linux64.zip
-        ++ Dockerfile
-        ++ my-email-template.groovy
-    docker-compose.yml
-    Dockerfile
-    Jenkinsfile - Jenkinsfile to run test
+    + images/ - Folder containing docker file for building up a custom docker image which is used in Jenkinsfile for running test
+    + docker-compose.yml
+    + Dockerfile
+    + Jenkinsfile - Jenkinsfile to run test

@@ -69,6 +69,12 @@ BrowserSettings_DefaultDownloadDirectory
     Call method    ${options}    add_experimental_option    prefs    ${prefs}
     [Return]    ${options}    # robotidy: off
 
+BrowserSettings_InsecureDownload
+    [Documentation]    Enable download for insecure http protocol
+    [Arguments]    ${options}    ${url}
+    Call method    ${options}    add_argument    ---unsafely-treat-insecure-origin-as-secure\=${url}
+    [Return]    ${options}    # robotidy: off
+
 CreateDriver
     [Documentation]    Create driver
     [Arguments]    ${options}
